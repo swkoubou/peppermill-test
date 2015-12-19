@@ -1,5 +1,5 @@
 # coding=utf-8
-
+# import types
 
 class QiImage:
     PARAMS = [
@@ -13,3 +13,6 @@ class QiImage:
     def __init__(self, ary):
         for i, key in enumerate(self.PARAMS):
             setattr(self, key, ary[i])
+
+    def __str__(self):
+        return ', '.join(["{0}:{1}".format(key, len(getattr(self, key)) if key == 'binary' else getattr(self, key)) for key in self.PARAMS])
