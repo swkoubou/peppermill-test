@@ -5,6 +5,7 @@ import struct
 from datetime import datetime
 from naoqi import ALBroker, ALProxy
 from PIL import Image
+from lib.qiwrapper import QiImage
 
 PEPPER_IP = "192.168.10.101"
 PEPPER_PORT = 9559
@@ -64,7 +65,7 @@ def main():
         depth_ary = video.getImageRemote(depth_subscribe_id)
         rgb_ary = video.getImageRemote(rgb_subscribe_id)
 
-        depth = NAOqiImage(depth_ary)
+        depth = QiImage(depth_ary)
         depth_binary = [struct.unpack('B', x)[0] for x in depth.binary]
         depth_save_path = DEPTH_FILE_PREFIX + "_" + str(i) + "_" + datetime.now().strftime("%Y%m%d_%H%M%S") + '.bmp'
         with Image.new("L", (depth.width, depth.height)) as im:
@@ -72,7 +73,7 @@ def main():
             im.save(depth_save_path, format='bmp')
         print u"depth image file was created: {0}".format(depth_save_path)
 
-        rgb = NAOqiImage(rgb_ary)
+        rgb = QiImage(rgb_ary)
         rgb_save_path = RGB_FILE_PREFIX + "_" + str(i) + "_" + datetime.now().strftime("%Y%m%d_%H%M%S") + '.bmp'
         rgb_binary = [struct.unpack('B', x)[0] for x in rgb.binary]
         with Image.new("RGB", (rgb.width, rgb.height)) as im:
@@ -91,20 +92,6 @@ def main():
 
     video.unsubscribe(depth_subscribe_id)
     video.unsubscribe(rgb_subscribe_id)
-
-
-class NAOqiImage:
-    PARAMS = [
-        'width', 'height', 'number_of_layer', 'color_space',
-        'time_stamp_sec', 'time_stamp_ms',
-        'binary',  # binary array of size height * width * nblayers containing image data.
-        'cameraID',
-        'left_angle', 'top_angle', 'right_angle', 'bottom_angle'
-    ]
-
-    def __init__(self, ary):
-        for i, key in enumerate(self.PARAMS):
-            setattr(self, key, ary[i])
 
 
 if __name__ == '__main__':
