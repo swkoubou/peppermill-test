@@ -2,12 +2,13 @@
 import pyaudio
 import wave
 import time
+from datetime import datetime
 
 chunk = 1024
 pyaudio_format = pyaudio.paInt16
 CHANNELS = 1
 RATE = 44100
-SAMPLING_TIME = 10
+SAMPLING_TIME = 5
 
 p = pyaudio.PyAudio()
 
@@ -39,13 +40,13 @@ try:
         frame.append(data)
         if (time.time() - start_time) >= (SAMPLING_TIME * count):
             print len(frame)
-            filename = "{}.wav".format(count)
+            filename = "{}.wav".format(datetime.now().strftime('%Y%m%d-%H%M%S'))
             wave_save(frame, filename)
             frame = []
             count += 1
 except KeyboardInterrupt:
     print len(frame)
-    filename = "{}.wav".format(count)
+    filename = "{}.wav".format(datetime.now().strftime('%Y%m%d-%H%M%S'))
     wave_save(frame, filename)
 
 stream.close()
