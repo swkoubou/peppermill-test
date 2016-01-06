@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+"""
+test by : python2.7+ ubuntu15.10
+録音して10分毎にファイルに保存する。
+"""
 import pyaudio
 import wave
 import time
@@ -8,7 +12,7 @@ chunk = 1024
 pyaudio_format = pyaudio.paInt16
 CHANNELS = 1
 RATE = 44100
-SAMPLING_TIME = 5
+SAMPLING_TIME = 10 * 60
 
 p = pyaudio.PyAudio()
 
