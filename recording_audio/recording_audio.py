@@ -16,6 +16,7 @@ CHANNELS = 1
 RATE = 44100
 CHUNK = 2**11
 SAMPLING_TIME = 10 * 60
+INPUT_DEVICE_INDEX = 5 # オーディオデバイスの番号
 
 audio = pyaudio.PyAudio()
 frames = []
@@ -35,7 +36,7 @@ stream = audio.open(format=FORMAT,
                     channels=CHANNELS,
                     rate=RATE,
                     input=True,
-                    input_device_index=5,
+                    input_device_index=INPUT_DEVICE_INDEX,
                     frames_per_buffer=CHUNK,
                     stream_callback=callback)
 
