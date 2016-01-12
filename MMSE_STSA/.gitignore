@@ -1,0 +1,6 @@
+*.pyc
+/dist/*
+/src/*
+!/dist/.gitkeep
+!/src/.gitkeep
+
