@@ -4,8 +4,7 @@ heatup API
 
 USAGE:
 Run the following command in your terminal.
-$ exprot FLASK_APP=heatup.py
-$ flask run
+$ python heatup.py
 """
 from flask import Flask, request
 import json
@@ -21,3 +20,6 @@ def analyze():
     else:
         response['is_burst'] = False
     return json.dumps(response)
+
+if __name__ == '__main__':
+    app.run()
