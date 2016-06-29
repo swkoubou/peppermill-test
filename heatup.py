@@ -21,6 +21,3 @@ def analyze():
     else:
         response['is_burst'] = False
     return json.dumps(response)
-
-if __name__ == '__main__':
-    app.run()
