@@ -112,10 +112,13 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 onRecord(false);
                 Log.d(LOG_TAG, "Stop Recording!");
+                Log.d(LOG_TAG, "Start Playing");
+                onPlay(true);
+                Log.d(LOG_TAG, "Stop Playing");
             }
         };
         _handler.postDelayed(stopRecordAfter5sec, 5000);
-        onPlay(true);
+
 
 
     }
