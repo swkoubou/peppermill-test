@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     private Handler _handler = new Handler();
-    private int DELAY = 5;
+    private Runnable stopRecordAfter5sec;
 
     private MediaPlayer   mPlayer = null;
     private MediaRecorder mRecorder = null;
@@ -29,9 +29,12 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = "AudioRecordTest";
 
 
+
+
     public MainActivity() {
         //mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
-        mFileName = getApplicationContext().getFilesDir().getAbsolutePath();
+        //mFileName = getApplicationContext().getFilesDir().getAbsolutePath();
+        mFileName = "/data/data/com.example.uryoya.record_test";
         mFileName += "/audiorecordtest.3gp";
         Log.d(">>>", mFileName);
     }
@@ -102,17 +105,17 @@ public class MainActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "program start");
         Log.d(LOG_TAG, mFileName);
 
-        _handler.postDelayed(new Runnable() {
+        onRecord(true);
+        Log.d(LOG_TAG, "Now Recording...");
+        stopRecordAfter5sec = new Runnable() {
             @Override
             public void run() {
-                onRecord(true);
-                Log.d(LOG_TAG, "Now Recording...");
-                //Thread.sleep(5 * 1000);
-                _handler.postDelayed(this, DELAY);
                 onRecord(false);
-                onPlay(true);
+                Log.d(LOG_TAG, "Stop Recording!");
             }
-        }, DELAY);
+        };
+        _handler.postDelayed(stopRecordAfter5sec, 5000);
+        onPlay(true);
 
 
     }
