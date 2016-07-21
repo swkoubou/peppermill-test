@@ -1,8 +1,10 @@
 package com.example.uryoya.record_test;
 import android.app.Activity;
+import android.content.Context;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -25,6 +27,14 @@ public class MainActivity extends AppCompatActivity {
     private MediaRecorder mRecorder = null;
     private static String mFileName = null;
     private static final String LOG_TAG = "AudioRecordTest";
+
+
+    public MainActivity() {
+        //mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
+        mFileName = getApplicationContext().getFilesDir().getAbsolutePath();
+        mFileName += "/audiorecordtest.3gp";
+        Log.d(">>>", mFileName);
+    }
 
 
     private void onRecord(boolean start) {
@@ -60,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startRecording() {
+        //mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
+        //mFileName += "/audiorecordtest.3gp";
         mRecorder = new MediaRecorder();
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
@@ -70,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
             mRecorder.prepare();
         } catch (IOException e) {
             Log.e(LOG_TAG, "prepare() failed");
+            Log.e(LOG_TAG, e.toString());
         }
 
         mRecorder.start();
@@ -81,31 +94,19 @@ public class MainActivity extends AppCompatActivity {
         mRecorder = null;
     }
 
+
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         Log.d(LOG_TAG, "program start");
-/*
-        LinearLayout ll = new LinearLayout(this);
-        mRecordButton = new RecordButton(this);
-        ll.addView(mRecordButton,
-                new LinearLayout.LayoutParams(
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        0));
-        mPlayButton = new PlayButton(this);
-        ll.addView(mPlayButton,
-                new LinearLayout.LayoutParams(
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        0));
-        setContentView(ll);
-        */
-        Log.d(LOG_TAG, "hoge");
+        Log.d(LOG_TAG, mFileName);
+
         _handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 onRecord(true);
+                Log.d(LOG_TAG, "Now Recording...");
                 //Thread.sleep(5 * 1000);
                 _handler.postDelayed(this, DELAY);
                 onRecord(false);
