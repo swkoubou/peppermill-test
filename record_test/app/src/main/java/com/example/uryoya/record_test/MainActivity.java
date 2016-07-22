@@ -1,20 +1,13 @@
 package com.example.uryoya.record_test;
-import android.app.Activity;
-import android.content.Context;
+
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.aldebaran.qi.QiCallback;
-import com.aldebaran.qi.sdk.Qi;
-import com.aldebaran.qi.sdk.object.interaction.Say;
-
 import java.io.IOException;
-import java.io.StringReader;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     public MainActivity() {
-        //mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
-        //mFileName = getApplicationContext().getFilesDir().getAbsolutePath();
         mFileName = "/data/data/com.example.uryoya.record_test";
         mFileName += "/audiorecordtest.3gp";
         Log.d(">>>", mFileName);
@@ -73,8 +64,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startRecording() {
-        //mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
-        //mFileName += "/audiorecordtest.3gp";
         mRecorder = new MediaRecorder();
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
