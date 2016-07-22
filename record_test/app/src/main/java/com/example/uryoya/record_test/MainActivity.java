@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             mPlayer.prepare();
             mPlayer.start();
         } catch (IOException e) {
-            Log.e(LOG_TAG, "prepare() failed");
+            Log.e(LOG_TAG, e.getMessage());
         }
     }
 
@@ -71,10 +71,14 @@ public class MainActivity extends AppCompatActivity {
             mRecorder.prepare();
         } catch (IOException e) {
             Log.e(LOG_TAG, "prepare() failed");
-            Log.e(LOG_TAG, e.toString());
+            Log.e(LOG_TAG, e.getMessage());
         }
 
-        mRecorder.start();
+        try {
+            mRecorder.start();
+        } catch (IllegalStateException e) {
+            Log.e(LOG_TAG, e.getMessage());
+        }
     }
 
     private void stopRecording() {
