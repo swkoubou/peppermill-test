@@ -10,9 +10,6 @@ import android.util.Log;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
-
-    private static final String TAG = "MainActivity";
-
     private Handler _handler = new Handler();
     private Runnable stopRecordAfter5sec;
 
