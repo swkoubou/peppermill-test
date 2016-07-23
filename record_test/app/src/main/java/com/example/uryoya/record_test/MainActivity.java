@@ -1,12 +1,22 @@
 package com.example.uryoya.record_test;
 
+import android.content.Context;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.MemoryFile;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
+import com.github.hiteshsondhi88.libffmpeg.FFmpegExecuteResponseHandler;
+import com.github.hiteshsondhi88.libffmpeg.LoadBinaryResponseHandler;
+import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,8 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private MediaRecorder mRecorder = null;
     private static String mFileName = null;
     private static final String LOG_TAG = "AudioRecordTest";
-
-
+    private static final String wavfilename = "audiorecordtest.wav";
 
 
     public MainActivity() {
@@ -91,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle icicle) {
+
         super.onCreate(icicle);
         Log.d(LOG_TAG, "program start");
         Log.d(LOG_TAG, mFileName);
@@ -110,6 +120,9 @@ public class MainActivity extends AppCompatActivity {
         _handler.postDelayed(stopRecordAfter5sec, 5000);
 
 
+        //convert 3gp to wav
+
+        ConvertWAV convertWAV = new ConvertWAV(mFileName);
 
     }
 
