@@ -15,6 +15,7 @@ public class Recorder {
 
     public Recorder(String savePath) {
         mFileName = savePath;
+        Log.d(LOG_TAG, mFileName);
     }
 
     public void recording(int seconds, final Runnable callback) {

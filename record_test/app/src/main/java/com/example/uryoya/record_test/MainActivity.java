@@ -1,7 +1,6 @@
 package com.example.uryoya.record_test;
 
 import android.media.MediaPlayer;
-import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,7 +9,6 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     private MediaPlayer   mPlayer = null;
-    private MediaRecorder mRecorder = null;
     private static String mFileName = null;
     private static final String LOG_TAG = "AudioRecordTest";
 
@@ -19,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
         mFileName += "/audiorecordtest.3gp";
         Log.d(">>>", mFileName);
     }
-
 
     private void startPlaying() {
         mPlayer = new MediaPlayer();
@@ -40,11 +37,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        Runnable player = new Runnable() {
+            @Override
+            public void run() {
+                startPlaying();
+            }
+        };
+
         Log.d(LOG_TAG, "program start");
         Log.d(LOG_TAG, mFileName);
 
-        Recorder recorder = new Recorder();
-        recorder.recording(10);
+        Recorder recorder = new Recorder(mFileName);
+        recorder.recording(10, player);
     }
 
 }
