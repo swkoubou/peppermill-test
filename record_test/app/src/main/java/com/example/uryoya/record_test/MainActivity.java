@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import java.io.IOException;
+import java.io.StringReader;
 
 public class MainActivity extends AppCompatActivity {
     private Handler _handler = new Handler();
@@ -18,15 +19,11 @@ public class MainActivity extends AppCompatActivity {
     private static String mFileName = null;
     private static final String LOG_TAG = "AudioRecordTest";
 
-
-
-
     public MainActivity() {
         mFileName = "/data/data/com.example.uryoya.record_test";
         mFileName += "/audiorecordtest.3gp";
         Log.d(">>>", mFileName);
     }
-
 
     private void onRecord(boolean start) {
         if (start) {
@@ -86,8 +83,6 @@ public class MainActivity extends AppCompatActivity {
         mRecorder.release();
         mRecorder = null;
     }
-
-
 
     @Override
     public void onCreate(Bundle icicle) {
