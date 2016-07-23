@@ -29,7 +29,7 @@ public class Recorder {
 
         startRecording();
         Log.d(LOG_TAG, "Recording now...");
-        runUntilWaitTime = new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 stopRecording();
@@ -37,8 +37,7 @@ public class Recorder {
                 Log.d(LOG_TAG, "Running callback now...");
                 callback.run();
             }
-        };
-        handler.postDelayed(runUntilWaitTime, seconds * 1000);
+        }, seconds * 1000);
     }
 
     private void startRecording() {
