@@ -31,18 +31,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        Runnable player = new Runnable() {
-            @Override
-            public void run() {
-                startPlaying();
-            }
-        };
-
         Log.d(LOG_TAG, "program start");
         Log.d(LOG_TAG, mFileName);
 
         Recorder recorder = new Recorder(mFileName);
-        recorder.recording(10, player);
+        recorder.recording(10, new Runnable() {
+            @Override
+            public void run() {
+                startPlaying();
+            }
+        });
     }
 
 }
