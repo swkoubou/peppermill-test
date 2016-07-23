@@ -9,14 +9,8 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     private MediaPlayer   mPlayer = null;
-    private static String mFileName = null;
+    private static String mFileName = "/data/data/com.example.uryoya.record_test/audiorecordtest.3gp";
     private static final String LOG_TAG = "AudioRecordTest";
-
-    public MainActivity() {
-        mFileName = "/data/data/com.example.uryoya.record_test";
-        mFileName += "/audiorecordtest.3gp";
-        Log.d(">>>", mFileName);
-    }
 
     private void startPlaying() {
         mPlayer = new MediaPlayer();
