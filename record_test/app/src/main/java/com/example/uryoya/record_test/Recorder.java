@@ -13,12 +13,11 @@ public class Recorder {
     private MediaRecorder mRecorder = null;
     private String mFileName = null;
 
-    public Recorder() {
-        mFileName = "/data/data/com.example.uryoya.record_test";
-        mFileName += "/audio_record.3gp";
+    public Recorder(String savePath) {
+        mFileName = savePath;
     }
 
-    public void recording(int seconds) {
+    public void recording(int seconds, final Runnable callback) {
         Handler handler = new Handler();
         Runnable runUntilWaitTime;
 
@@ -29,6 +28,8 @@ public class Recorder {
             public void run() {
                 stopRecording();
                 Log.d(LOG_TAG, "Stop Recording...");
+                Log.d(LOG_TAG, "Running callback now...");
+                callback.run();
             }
         };
         handler.postDelayed(runUntilWaitTime, seconds * 1000);
