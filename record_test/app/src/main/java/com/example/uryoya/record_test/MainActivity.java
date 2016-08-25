@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private MediaPlayer   mPlayer = null;
     private static String mFileName = "/data/data/com.example.uryoya.record_test/audiorecordtest.3gp";
     private static final String LOG_TAG = "AudioRecordTest";
-<<<<<<< HEAD
+
     private static final String wavfilename = "audiorecordtest.wav";
 
 
@@ -49,8 +49,6 @@ public class MainActivity extends AppCompatActivity {
             stopPlaying();
         }
     }
-=======
->>>>>>> 77e31f5ba2b220634ccd51798d5ca8732c9c0c2a
 
     private void startPlaying() {
         mPlayer = new MediaPlayer();
@@ -81,18 +79,6 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 startPlaying();
             }
-<<<<<<< HEAD
-        };
-        _handler.postDelayed(stopRecordAfter5sec, 5000);
-
-
-        //convert 3gp to wav
-
-        ConvertWAV convertWAV = new ConvertWAV(mFileName);
-
-=======
-        });
->>>>>>> 77e31f5ba2b220634ccd51798d5ca8732c9c0c2a
     }
 
 }
