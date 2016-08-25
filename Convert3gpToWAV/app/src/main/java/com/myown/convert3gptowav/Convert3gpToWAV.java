@@ -26,7 +26,6 @@ public class Convert3gpToWAV {
 	private FFmpeg ffmpeg = null;
 	private String TAG = this.getClass().toString();
 
-
 	public Convert3gpToWAV(Context context){
 		this.context = context;
 		ffmpeg = FFmpeg.getInstance(context);
@@ -122,35 +121,4 @@ public class Convert3gpToWAV {
 			e.printStackTrace();
 		}
 	}
-//
-//	private void loadToExecute(final String[] cmd){
-//		try {
-//			ffmpeg.loadBinary(new LoadBinaryResponseHandler() {
-//
-//				@Override
-//				public void onStart() {
-//					Log.d(TAG, "load onstart");
-//				}
-//
-//				@Override
-//				public void onFailure() {
-//					Log.d(TAG, "load onFailure");
-//				}
-//
-//				@Override
-//				public void onSuccess() {
-//					Log.d(TAG, "load onSuccess");
-//				}
-//
-//				@Override
-//				public void onFinish() {
-//					Log.d(TAG, "load onFinish");
-//					execute(cmd);
-//				}
-//			});
-//		} catch (FFmpegNotSupportedException e) {
-//			e.printStackTrace();
-//		}
-//	}
-
 }

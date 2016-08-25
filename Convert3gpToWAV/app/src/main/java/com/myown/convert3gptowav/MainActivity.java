@@ -29,8 +29,7 @@ public class MainActivity extends AppCompatActivity {
 		convert3gpToWAV.convert(in_filePath, out_filePath, new Runnable() {
 			@Override
 			public void run() {
-				// start converting
-				Log.d("main activity", "convert finished");
+
 			}
 		});
 
