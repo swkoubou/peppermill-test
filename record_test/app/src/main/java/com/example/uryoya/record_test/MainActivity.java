@@ -3,11 +3,9 @@ package com.example.uryoya.record_test;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-<<<<<<< HEAD
+
 import android.os.Handler;
 import android.os.MemoryFile;
-=======
->>>>>>> 77e31f5ba2b220634ccd51798d5ca8732c9c0c2a
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
