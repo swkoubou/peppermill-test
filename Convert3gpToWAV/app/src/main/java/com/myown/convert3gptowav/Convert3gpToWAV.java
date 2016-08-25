@@ -1,7 +1,6 @@
 package com.myown.convert3gptowav;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.os.Handler;
 import android.util.Log;
 
@@ -11,12 +10,6 @@ import com.github.hiteshsondhi88.libffmpeg.LoadBinaryResponseHandler;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
 
 /**
  * Created by Yuta.Watanabe on 2016/07/23.
@@ -46,7 +39,6 @@ public class Convert3gpToWAV {
 						execute(cmd, new Runnable() {
 							@Override
 							public void run() {
-								Log.d(TAG, "execute finished !!!!!!");
 								callback.run();
 							}
 						});
