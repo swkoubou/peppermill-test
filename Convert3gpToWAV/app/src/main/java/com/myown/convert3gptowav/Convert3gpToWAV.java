@@ -52,7 +52,7 @@ public class Convert3gpToWAV {
 				});
 			}
 		});
-		callback.run();う
+		callback.run();
 	}
 
 	private void load(final Runnable callback){
