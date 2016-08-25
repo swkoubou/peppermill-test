@@ -39,15 +39,50 @@ public class Convert3gpToWAV {
 		String str = "-i " + input_file_path + " " + outputfile_path;
 		final String[] cmd = str.split(" ");
 
-		loadToExecute(cmd);
+//		loadToExecute(cmd);
 
 		handler.post(new Runnable() {
 			@Override
 			public void run() {
-
+				load(new Runnable() {
+					@Override
+					public void run() {
+						execute(cmd);
+					}
+				});
 			}
 		});
-		callback.run();
+		callback.run();う
+	}
+
+	private void load(final Runnable callback){
+		try {
+			ffmpeg.loadBinary(new LoadBinaryResponseHandler() {
+
+				@Override
+				public void onStart() {
+						Log.d(TAG, "load onstart");
+					}
+
+				@Override
+				public void onFailure() {
+						Log.d(TAG, "load onFailure");
+					}
+
+				@Override
+				public void onSuccess() {
+						Log.d(TAG, "load onSuccess");
+					}
+
+				@Override
+				public void onFinish() {
+					Log.d(TAG, "load onFinish");
+					callback.run();
+				}
+			});
+		} catch (FFmpegNotSupportedException e) {
+				e.printStackTrace();
+		}
 	}
 
 	private void loadToExecute(final String[] cmd){
