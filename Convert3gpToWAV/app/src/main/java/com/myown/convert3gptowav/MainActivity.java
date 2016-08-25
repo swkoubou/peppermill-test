@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 			@Override
 			public void run() {
 				// start converting
+				Log.d("main activity", "convert finished");
 			}
 		});
 

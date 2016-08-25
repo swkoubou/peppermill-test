@@ -35,11 +35,8 @@ public class Convert3gpToWAV {
 	public void convert(String input_file_path, String outputfile_path, final Runnable callback){
 
 		Handler handler = new Handler();
-		Runnable runnable;
 		String str = "-i " + input_file_path + " " + outputfile_path;
 		final String[] cmd = str.split(" ");
-
-//		loadToExecute(cmd);
 
 		handler.post(new Runnable() {
 			@Override
@@ -47,12 +44,18 @@ public class Convert3gpToWAV {
 				load(new Runnable() {
 					@Override
 					public void run() {
-						execute(cmd);
+						execute(cmd, new Runnable() {
+							@Override
+							public void run() {
+								Log.d(TAG, "execute finished !!!!!!");
+								callback.run();
+							}
+						});
+
 					}
 				});
 			}
 		});
-		callback.run();
 	}
 
 	private void load(final Runnable callback){
@@ -85,36 +88,7 @@ public class Convert3gpToWAV {
 		}
 	}
 
-	private void loadToExecute(final String[] cmd){
-		try {
-			ffmpeg.loadBinary(new LoadBinaryResponseHandler() {
-
-				@Override
-				public void onStart() {
-					Log.d(TAG, "load onstart");
-				}
-
-				@Override
-				public void onFailure() {
-					Log.d(TAG, "load onFailure");
-				}
-
-				@Override
-				public void onSuccess() {
-					Log.d(TAG, "load onSuccess");
-				}
-
-				@Override
-				public void onFinish() {
-					Log.d(TAG, "load onFinish");
-					execute(cmd);
-				}
-			});
-		} catch (FFmpegNotSupportedException e) {
-			e.printStackTrace();
-		}
-	}
-	private void execute(String[] cmd){
+	private void execute(String[] cmd, final Runnable callback){
 		try {
 			ffmpeg.execute(cmd, new ExecuteBinaryResponseHandler() {
 
@@ -141,10 +115,42 @@ public class Convert3gpToWAV {
 				@Override
 				public void onFinish() {
 					Log.d(TAG, "execute onFinish");
+					callback.run();
 				}
 			});
 		} catch (FFmpegCommandAlreadyRunningException e) {
 			e.printStackTrace();
 		}
 	}
+//
+//	private void loadToExecute(final String[] cmd){
+//		try {
+//			ffmpeg.loadBinary(new LoadBinaryResponseHandler() {
+//
+//				@Override
+//				public void onStart() {
+//					Log.d(TAG, "load onstart");
+//				}
+//
+//				@Override
+//				public void onFailure() {
+//					Log.d(TAG, "load onFailure");
+//				}
+//
+//				@Override
+//				public void onSuccess() {
+//					Log.d(TAG, "load onSuccess");
+//				}
+//
+//				@Override
+//				public void onFinish() {
+//					Log.d(TAG, "load onFinish");
+//					execute(cmd);
+//				}
+//			});
+//		} catch (FFmpegNotSupportedException e) {
+//			e.printStackTrace();
+//		}
+//	}
+
 }
