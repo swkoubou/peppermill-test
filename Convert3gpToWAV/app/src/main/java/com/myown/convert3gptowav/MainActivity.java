@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 			@Override
 			public void run() {
 				// start converting
+				Log.d("fsadfsdfa", "main activity runnable run finish");
 			}
 		});
 

@@ -35,16 +35,19 @@ public class Convert3gpToWAV {
 	public void convert(String input_file_path, String outputfile_path, int seconds, final Runnable callback){
 
 		Handler handler = new Handler();
-
+		Runnable runnable;
 		String str = "-i " + input_file_path + " " + outputfile_path;
 		final String[] cmd = str.split(" ");
+
+		loadToExecute(cmd);
 
 		handler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				loadToExecute(cmd);
 				callback.run();
+
 			}
+
 		}, seconds * 1000);
 	}
 
