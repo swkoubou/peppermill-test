@@ -32,7 +32,7 @@ public class Convert3gpToWAV {
 		ffmpeg = FFmpeg.getInstance(context);
 
 	}
-	public void convert(String input_file_path, String outputfile_path, int seconds, final Runnable callback){
+	public void convert(String input_file_path, String outputfile_path, final Runnable callback){
 
 		Handler handler = new Handler();
 		Runnable runnable;
@@ -41,14 +41,13 @@ public class Convert3gpToWAV {
 
 		loadToExecute(cmd);
 
-		handler.postDelayed(new Runnable() {
+		handler.post(new Runnable() {
 			@Override
 			public void run() {
-				callback.run();
 
 			}
-
-		}, seconds * 1000);
+		});
+		callback.run();
 	}
 
 	private void loadToExecute(final String[] cmd){

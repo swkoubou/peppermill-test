@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 		Handler handler = new Handler();
 
 		Convert3gpToWAV convert3gpToWAV = new Convert3gpToWAV(MainActivity.this);
-		convert3gpToWAV.convert(in_filePath, out_filePath, 10, new Runnable() {
+		convert3gpToWAV.convert(in_filePath, out_filePath, new Runnable() {
 			@Override
 			public void run() {
 				// start converting
