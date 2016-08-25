@@ -1,0 +1,135 @@
+﻿<!DOCTYPE HTML>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pie Timer</title>
+    <link rel="stylesheet" href="css/hoge.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <style type="text/css">
+
+    </style>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+    <script type="text/javascript" src="./jquery.pietimer.js"></script>
+    <script type="text/javascript">
+        function cntStart() {
+            var min = (String(($('#min1').val() + $('#min2').val()))); //string→int変換 分の値を取得
+            var sec = (String(($('#sec1').val() + $('#sec2').val()))); // 秒の値を取得
+            if ((min === "00") && (sec === "00")) {
+                alert("時刻が未入力です");
+            } else {
+                if (min === "") {
+                    min = 0;
+                }
+                min = parseInt(min);
+
+                if (sec === "") {
+                    sec = 0;
+                }
+                sec = parseInt(sec);
+                var time = sec + (min * 60); //秒に直す
+
+                $('#demo').pietimer({
+                        seconds: time,
+                        color: 'rgba(0, 0, 0, 0.8)',
+                        height: 500,
+                        width: 500,
+                        is_reversed: false
+                    },
+                    function() {
+                        alert("会議終了");
+
+                    });
+                $('.boom').hide();
+                $('#demo').pietimer('start');
+                return false;
+
+            }
+        }
+
+        function cntStop() {
+            $('#demo').pietimer('pause');
+            var min = $('#min').val(); //string→int変換
+            var sec = $('#sec').val();
+            var time = sec + (min * 60); //秒に直す
+
+            return false;
+        }
+
+        $(function() {
+            $('.boom').hide();
+
+        });
+    </script>
+</head>
+
+<body>
+    <hoge class="box1">
+        <h1>タイミングキーパー</h1>
+        <div class="box1">
+            <form name="timer">
+                <select id="min1">
+                    <option value=0>0</option>
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5</option>
+                    <option value=6>6</option>
+                    <option value=7>7</option>
+                    <option value=8>8</option>
+                    <option value=9>9</option>
+                    </select>
+                <select id="min2">
+                    <option value=0>0</option>
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5</option>
+                    <option value=6>6</option>
+                    <option value=7>7</option>
+                    <option value=8>8</option>
+                    <option value=9>9</option>
+                    </select>分
+                <select id="sec1">
+                    <option value=0>0</option>
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5</option>
+                    <option value=6>6</option>
+                    <option value=7>7</option>
+                    <option value=8>8</option>
+                    <option value=9>9</option>
+                    </select>
+                <select id="sec2">
+                    <option value=0>0</option>
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5</option>
+                    <option value=6>6</option>
+                    <option value=7>7</option>
+                    <option value=8>8</option>
+                    <option value=9>9</option>
+                    </select>秒
+        </div>
+        <div class="box2">
+            <input class="btn" id="start" type="button" value="スタート" onclick="cntStart()">
+            <input class="btn" id="pause" type="button" value="終了" onclick="cntStop()">
+        </div>
+        </form>
+
+        <p id="demo" style="height: 150px;"></p>
+        <h3 class="boom">終わり!</h3>
+        <p class="boom">時間が来たぞい</p>
+
+    </hoge>
+</body>
+
+</html>

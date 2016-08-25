@@ -1,0 +1,59 @@
+<!-- memory-to-tablet -->
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>QiMessaging (メモリを監視)</title>
+    <script src="/libs/qimessaging/2/qimessaging.js"></script>
+    <script>
+      var session;
+      QiSession( function (s) {
+        session = s;
+      });
+      var session2;
+      QiSession2( function (s) {
+        session2 = s;
+      });
+
+      function toTabletHandler(value) {
+        console.log("PepperQiMessaging/totabletイベント発生: " + value);
+        document.getElementById("memory").innerHTML = value;
+      }
+
+
+
+      function startSubscribe() {
+          QiSession( function (s) {
+          session = s;
+          session.service("ALMemory").then(function (ALMemory) {
+            console.log("got ALMemory object");
+            ALMemory.subscriber("PepperQiMessaging/totablet").then(function(subscriber) {
+              subscriber.signal.connect(toTabletHandler);
+            });
+          });
+        });
+      }
+
+      function sampleButtonClicked() {
+          session.service("ALMemory").then(function (ALMemory) {
+              console.log("got ALMemory object");
+              ALMemory.raiseEvent("PepperQimessaging/fromtablet", "イベント発生");
+          });
+      }
+
+    </script>
+  </head>
+  <body onLoad="startSubscribe();">
+    <div style="font-size: 6em">
+      QiMessaging (メモリを監視)
+    </div>
+    <div style="font-size: 4em">
+      現在のPepperQiMessaging/totabletの値(見ている人のID): <span id="memory">不明</span>
+    </div>
+    <div style="font-size: 6em">
+      QiMessaging (raise memory event)
+    </div>
+    <button style="font-size: 6em" type="button" onclick="sampleButtonClicked();">イベント発生</button>
+  </body>
+</html>
+
